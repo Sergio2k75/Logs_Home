@@ -1,0 +1,3 @@
+# Dev / screenshot tooling (optional for running the app)
+-r requirements.txt
+playwright>=1.51.0

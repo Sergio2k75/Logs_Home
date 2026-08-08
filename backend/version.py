@@ -1,13 +1,7 @@
-import json
-import os
-from pathlib import Path
+"""Application version — single source of truth for UI and API."""
 
-ROOT = Path(__file__).resolve().parent.parent
-PACKAGE_JSON = ROOT / "package.json"
+APP_VERSION = "0.02"
 
 
 def get_app_version() -> str:
-    if PACKAGE_JSON.exists():
-        data = json.loads(PACKAGE_JSON.read_text(encoding="utf-8"))
-        return str(data.get("version", "0.0.0"))
-    return "0.0.0"
+    return APP_VERSION

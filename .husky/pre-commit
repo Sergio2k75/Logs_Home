@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-node scripts/capture-screenshot.mjs
-git add README.md docs/screenshot.png

@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+# Pre-commit: refresh README screenshot (Python Playwright).
+# Skip with: SKIP_SCREENSHOT=1 git commit ...
+# Require success with: REQUIRE_SCREENSHOT=1 git commit ...
+
+if [ "$SKIP_SCREENSHOT" = "1" ]; then
+  echo "Skipping screenshot (SKIP_SCREENSHOT=1)"
+  exit 0
+fi
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT" || exit 1
+
+if ! python scripts/capture_screenshot.py; then
+  if [ "$REQUIRE_SCREENSHOT" = "1" ]; then
+    echo "Screenshot required (REQUIRE_SCREENSHOT=1); commit aborted."
+    exit 1
+  fi
+  echo "Screenshot skipped (install: pip install -r requirements-dev.txt && playwright install chromium)"
+  exit 0
+fi
+
+git add README.md docs/screenshot.png
+exit 0
