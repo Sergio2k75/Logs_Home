@@ -1,15 +1,21 @@
 # Logs Home
 
+<!-- APP_SCREENSHOT -->
+![Logs Home screenshot](docs/screenshot.png)
+<!-- /APP_SCREENSHOT -->
+
 Local log viewer: register named log sources by file path, tail the latest lines, and highlight matching entries.
 
 ## Requirements
 
 - Python 3.10+
+- Node.js 18+ (for Husky screenshot hook)
 
 ## Setup
 
 ```bash
 pip install -r requirements.txt
+npm install
 ```
 
 ## Run
@@ -32,3 +38,13 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 Sources are saved in `data/sources.json` (created on first run).
 
 The browse button opens a native file dialog on the machine where the server is running. It requires a desktop session (not headless/remote without display).
+
+## Development
+
+Each commit runs a Husky pre-commit hook that captures a fresh app screenshot and updates the README image above. Run manually with:
+
+```bash
+npm run screenshot
+```
+
+App version is defined in `package.json` and shown in the top-right corner of the UI.

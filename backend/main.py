@@ -7,10 +7,11 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from backend import file_picker, sources_store, tail
+from backend.version import get_app_version
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
-app = FastAPI(title="Logs Home", version="1.0.0")
+app = FastAPI(title="Logs Home", version=get_app_version())
 
 
 class SourceCreate(BaseModel):
@@ -35,6 +36,15 @@ class TailResponse(BaseModel):
 
 class PickFileResponse(BaseModel):
     path: str
+
+
+class VersionResponse(BaseModel):
+    version: str
+
+
+@app.get("/api/version", response_model=VersionResponse)
+def api_version() -> VersionResponse:
+    return VersionResponse(version=get_app_version())
 
 
 @app.post("/api/pick-file", response_model=PickFileResponse, responses={204: {"description": "User cancelled"}})

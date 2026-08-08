@@ -1,10 +1,11 @@
 import json
+import os
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DATA_DIR = Path(os.environ.get("LOGS_HOME_DATA_DIR", Path(__file__).resolve().parent.parent / "data"))
 SOURCES_FILE = DATA_DIR / "sources.json"
 
 

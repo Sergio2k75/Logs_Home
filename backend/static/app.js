@@ -22,6 +22,17 @@ const highlightEnabled = $("#highlight-enabled");
 const highlightPattern = $("#highlight-pattern");
 const highlightCaseSensitive = $("#highlight-case-sensitive");
 const logOutput = $("#log-output");
+const appVersion = $("#app-version");
+
+async function loadVersion() {
+  try {
+    const data = await api("/api/version");
+    appVersion.textContent = `v${data.version}`;
+    appVersion.hidden = false;
+  } catch {
+    appVersion.hidden = true;
+  }
+}
 
 async function api(path, options = {}) {
   const res = await fetch(path, {
@@ -249,3 +260,4 @@ document.querySelectorAll(".preset").forEach((btn) => {
 });
 
 loadSources().catch((err) => showFormError(err.message));
+loadVersion();

@@ -1,6 +1,2 @@
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.env
-data/sources.json
+node_modules/
+docs/fixtures/.screenshot-data/

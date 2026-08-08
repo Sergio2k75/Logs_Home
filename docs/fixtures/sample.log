@@ -1,0 +1,8 @@
+2026-08-08 10:00:01 INFO Starting ollama service
+2026-08-08 10:00:02 INFO Model loaded: llama3
+2026-08-08 10:00:03 WARN GPU memory usage high
+2026-08-08 10:00:04 ERR Connection timeout to backend
+2026-08-08 10:00:05 INFO Retrying connection
+2026-08-08 10:00:06 ERROR Fatal: out of memory
+2026-08-08 10:00:07 INFO Service restarted
+2026-08-08 10:00:08 INFO Ready on port 11434

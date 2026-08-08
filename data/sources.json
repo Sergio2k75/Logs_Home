@@ -1,0 +1,14 @@
+[
+  {
+    "id": "afa2d44d-c11b-486d-9954-e4072f5815dd",
+    "name": "test",
+    "path": "C:\\Users\\super\\AppData\\Local\\Ollama\\server.log",
+    "created_at": "2026-08-08T16:43:38.108634+00:00"
+  },
+  {
+    "id": "e86557a9-50d9-4bf9-b26c-feb7ee3c494e",
+    "name": "DumpStack",
+    "path": "C:\\DumpStack.log",
+    "created_at": "2026-08-08T17:23:38.511825+00:00"
+  }
+]
