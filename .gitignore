@@ -6,3 +6,7 @@ venv/
 data/sources.json
 docs/fixtures/.screenshot-data/
 node_modules/
+.pytest_cache/
+test-results/
+playwright-report/
+blob-report/

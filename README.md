@@ -16,7 +16,7 @@ The UI is served by a small FastAPI server on localhost. A browser alone cannot 
 |------------|------------|
 | **Python 3.10+** | Running the app |
 | **Git for Windows** (or Git with a POSIX shell) | Pre-commit screenshot hook |
-| **Playwright Chromium** (optional) | Auto-updating the README screenshot on commit |
+| **Playwright Chromium** (optional) | E2e tests and auto-updating the README screenshot on commit |
 
 ---
 
@@ -112,7 +112,8 @@ Click **×** on a source in the list. This only removes the saved entry; it does
 Logs_Home/
   README.md
   requirements.txt          # Runtime: FastAPI, uvicorn, pydantic
-  requirements-dev.txt      # + Playwright for screenshots
+  requirements-dev.txt      # + Playwright, pytest (tests + screenshots)
+  pytest.ini                # Playwright e2e defaults
   backend/
     main.py                 # FastAPI app and API routes
     sources_store.py        # Named sources JSON store
@@ -124,7 +125,12 @@ Logs_Home/
     sources.json            # Your sources (created at runtime, gitignored)
   docs/
     screenshot.png          # README screenshot
-    fixtures/sample.log     # Demo log for screenshots
+    fixtures/sample.log     # Demo log for screenshots / e2e
+  tests/
+    README.md               # How to run and extend e2e tests
+    conftest.py             # Server + page fixtures
+    helpers/                # Shared uvicorn + screenshot helpers
+    e2e/                    # Playwright browser tests
   scripts/
     capture_screenshot.py   # Capture UI screenshot + update README
     install_hooks.py        # Point git at scripts/git-hooks
@@ -163,11 +169,25 @@ Bump that value when you release a meaningful change. The API (`GET /api/version
 
 ---
 
+## Development: tests
+
+Playwright e2e tests live under [`tests/`](tests/). They start a temporary uvicorn server with an isolated data directory and drive Chromium against the UI.
+
+```bash
+pip install -r requirements-dev.txt
+playwright install chromium
+pytest
+```
+
+See [`tests/README.md`](tests/README.md) for headed mode, debugging, fixtures, and conventions.
+
+---
+
 ## Development: README screenshots (optional)
 
 On each commit, a git pre-commit hook can start the app briefly, seed demo data from `docs/fixtures/sample.log`, capture a Playwright screenshot, and update the image block at the top of this README.
 
-This does **not** require Node.js. It uses Python Playwright and a plain git hook.
+This does **not** require Node.js. It uses Python Playwright (shared helpers in `tests/helpers/`) and a plain git hook.
 
 ### One-time setup
 
@@ -191,8 +211,7 @@ python scripts/capture_screenshot.py
 
 This writes `docs/screenshot.png` and refreshes the `<!-- APP_SCREENSHOT -->
 ![Logs Home screenshot](docs/screenshot.png)
-<!-- /APP_SCREENSHOT -->
-```
+<!-- /APP_SCREENSHOT -->` block. The same capture logic can be run via `pytest -m screenshot` (deselected by default).
 
 ---
 
@@ -205,6 +224,7 @@ This writes `docs/screenshot.png` and refreshes the `<!-- APP_SCREENSHOT -->
 | Folder button does nothing / errors | Run uvicorn on a machine with a desktop display; check the form error message |
 | Screenshot hook skipped | `pip install -r requirements-dev.txt` then `playwright install chromium` |
 | Hooks not running on commit | Run `python scripts/install_hooks.py` and confirm `git config --get core.hooksPath` is `scripts/git-hooks` |
+| E2e tests fail to start | Confirm Chromium is installed (`playwright install chromium`) and no leftover process blocks the ephemeral test port |
 | Stale UI after code change | Restart uvicorn, or use `--reload` and hard-refresh the browser |
 
 ---

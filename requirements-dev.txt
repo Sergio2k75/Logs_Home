@@ -1,3 +1,5 @@
-# Dev / screenshot tooling (optional for running the app)
+# Dev / screenshot tooling and e2e tests (optional for running the app)
 -r requirements.txt
 playwright>=1.51.0
+pytest>=8.0.0
+pytest-playwright>=0.6.0
