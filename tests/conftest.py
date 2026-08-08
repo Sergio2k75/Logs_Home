@@ -66,6 +66,12 @@ def clear_sources(request: pytest.FixtureRequest):
         yield
         return
 
+    # Unit tests do not need a live server or source cleanup.
+    test_path = Path(str(request.path))
+    if "e2e" not in test_path.parts:
+        yield
+        return
+
     base_url: str = request.getfixturevalue("base_url")
     for source_id in _list_source_ids(base_url):
         _delete_source(base_url, source_id)
