@@ -1,10 +1,17 @@
 from pathlib import Path
-import tkinter as tk
-from tkinter import filedialog
 
 
 def pick_log_file() -> str | None:
     """Open the native file picker and return an absolute path, or None if cancelled."""
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+    except ImportError as exc:
+        raise RuntimeError(
+            "File picker requires tkinter. Install python3-tk (or equivalent) "
+            "or paste the file path manually."
+        ) from exc
+
     root = tk.Tk()
     root.withdraw()
     root.wm_attributes("-topmost", 1)
