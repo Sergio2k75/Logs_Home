@@ -83,14 +83,17 @@ Sources are stored in `data/sources.json` (created on first save). That file is 
 1. Click a source in the left list.
 2. The right panel shows the latest lines (newest toward the bottom).
 3. Choose how many lines to load: **50 / 200 / 500 / 1000**.
-4. Leave **Auto-refresh** on to poll every ~2 seconds, or click **Refresh** manually.
+4. Leave **Auto-refresh** on to poll every ~2 seconds while the view is following the end of the file. **Pause** freezes those lines. **Follow** loads the latest lines and resumes polling. Scrolling up, or stepping through highlights, pauses as well, so new lines do not replace what you are reading. Scroll back to the bottom, or click **Follow**, to resume. Uncheck **Auto-refresh** to stop polling entirely. **Refresh** loads once and, while paused, keeps your place.
 
 ### Highlight matching lines
 
 1. Enable **Highlight**.
 2. Set a **pattern** (default suggestion: `ERR`). Any line containing that substring is highlighted.
-3. Optionally turn on **Case sensitive**.
-4. Use presets **ERR**, **ERROR**, **WARN**, or **FATAL** to fill the pattern quickly (still editable).
+3. The bar shows how many of the loaded lines match, for example `2 matches`. **Previous** and **Next** step through those lines (`1 / 2`, wrapping at the ends). Enter in the pattern field steps forward; Shift+Enter steps back. One match can still be focused (`1 / 1`). With no matches, the buttons stay disabled.
+4. Optionally turn on **Case sensitive**.
+5. Use presets **ERR**, **ERROR**, **WARN**, or **FATAL** to fill the pattern quickly (still editable).
+
+Changing the pattern updates the count and leaves the scroll position where it is. Stepping through matches pauses live updates. A refresh while paused selects the same line again when it is still loaded, instead of another row. The count covers only the lines currently loaded.
 
 Highlighting runs in the browser; it does not change the log file.
 

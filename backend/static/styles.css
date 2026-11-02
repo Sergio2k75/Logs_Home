@@ -198,6 +198,18 @@ button:hover {
   background: var(--border);
 }
 
+button:disabled,
+button:disabled:hover {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary:disabled,
+.btn-secondary:disabled:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
 .error {
   margin: 0 0 0.75rem;
   padding: 0.5rem 0.75rem;
@@ -374,6 +386,39 @@ button:hover {
   background: var(--border);
 }
 
+.preset.is-active[data-tone="error"],
+.preset.is-active[data-tone="error"]:hover {
+  color: #ffaba8;
+  background: var(--danger-bg);
+  box-shadow: inset 0 0 0 1px var(--danger);
+}
+
+.preset.is-active[data-tone="warn"],
+.preset.is-active[data-tone="warn"]:hover {
+  color: #e3b341;
+  background: var(--warn-bg);
+  box-shadow: inset 0 0 0 1px #d29922;
+}
+
+.match-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-basis: 100%;
+}
+
+.match-nav[hidden] {
+  display: none;
+}
+
+.match-status {
+  min-width: 5.5rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text-muted);
+}
+
 .log-output {
   flex: 1;
   min-height: 400px;
@@ -395,9 +440,15 @@ button:hover {
   padding: 0.1rem 0;
 }
 
-.log-line.highlight-error {
+.log-line.highlight-error,
+.log-line.fetch-error {
   background: var(--danger-bg);
   color: #ffaba8;
+}
+
+.log-line.highlight-current {
+  outline: 2px solid var(--text);
+  outline-offset: -2px;
 }
 
 .log-line.highlight-warn {

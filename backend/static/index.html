@@ -68,6 +68,7 @@
                 <input type="checkbox" id="auto-refresh" checked>
                 <span>Auto-refresh</span>
               </label>
+              <button type="button" id="follow-toggle" class="btn-secondary" hidden>Pause</button>
               <button type="button" id="refresh-btn" class="btn-secondary">Refresh</button>
             </div>
           </div>
@@ -87,10 +88,15 @@
             </label>
             <div class="presets">
               <span class="presets-label">Presets:</span>
-              <button type="button" class="preset" data-pattern="ERR">ERR</button>
-              <button type="button" class="preset" data-pattern="ERROR">ERROR</button>
-              <button type="button" class="preset" data-pattern="WARN">WARN</button>
-              <button type="button" class="preset" data-pattern="FATAL">FATAL</button>
+              <button type="button" class="preset" data-pattern="ERR" data-tone="error" aria-pressed="false">ERR</button>
+              <button type="button" class="preset" data-pattern="ERROR" data-tone="error" aria-pressed="false">ERROR</button>
+              <button type="button" class="preset" data-pattern="WARN" data-tone="warn" aria-pressed="false">WARN</button>
+              <button type="button" class="preset" data-pattern="FATAL" data-tone="error" aria-pressed="false">FATAL</button>
+            </div>
+            <div id="match-nav" class="match-nav" hidden>
+              <button type="button" id="match-prev" class="btn-secondary" disabled>Previous</button>
+              <span id="match-status" class="match-status" aria-live="polite">0 matches</span>
+              <button type="button" id="match-next" class="btn-secondary" disabled>Next</button>
             </div>
           </div>
 
